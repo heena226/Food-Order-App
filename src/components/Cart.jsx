@@ -22,6 +22,7 @@ export default function Cart() {
     }
 
     function handleGoToCheckout() {
+        console.log("Its here");
         userProgressCxt.showCheckout();
     }
 
@@ -31,7 +32,8 @@ export default function Cart() {
         <Modal 
             className="cart" 
             open={userProgressCxt.progress === 'cart'}
-            onClose={handleCloseCart}>
+            onClose={userProgressCxt.progress === 'cart' ? handleCloseCart : null}
+        >
             <h2>Your Cart</h2>
             <ul>
                 {cartCxt.items.map((item) => (
@@ -50,9 +52,9 @@ export default function Cart() {
             </p>
             <p className="modal-actions">
                 <Button textOnly onClick={handleCloseCart}>Close</Button>
-                {(cartCxt.items.length > 0) && 
+                {(cartCxt.items.length > 0) && (
                     <Button onClick={handleGoToCheckout}>Go to Checkout</Button>
-                }
+                )}
             </p>
         </Modal>
     )
